@@ -20,9 +20,8 @@ nav {
 .task-containers {
     background-color: rgb(255, 255, 255, 0.1);
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-    width: 300px;
     border-radius: 5px;
-    margin: 5px;
+    margin-bottom: 5px;
 }
 
 .tasks {
@@ -92,7 +91,8 @@ nav {
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.027);
     z-index: 10;
 }
-.add-task-popup > input {
+.add-task-popup > input,
+.add-task-popup > div {
     margin-top: 5px;
     margin-bottom: 5px;
     background: rgba(0, 0, 0, 0.473);
@@ -101,6 +101,15 @@ nav {
     padding: 3px;
     color: white;
     border-radius: 5px;
+}
+
+.error {
+    color: #b00020;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 0;
+    margin-left: 2px;
+    margin-top: 0;
 }
 
 .add-task-popup > input:focus {
@@ -120,4 +129,21 @@ nav {
 
 .add-task-popup > button:hover {
     background-color: rgb(135, 20, 243);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    filter: brightness(0) invert(1) sepia(1) saturate(10000%) hue-rotate(330deg);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: invert(1);
+}
+
+select:hover {
+    cursor: pointer;
+}
+
+select:focus {
+    outline: none;
 }
