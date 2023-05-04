@@ -1,4 +1,10 @@
-import { isValidated, showTaskPopup, hideTaskPopup } from "./helper.js";
+import {
+    isValidated,
+    showTaskPopup,
+    hideTaskPopup,
+    createTask,
+    handleTaskClick,
+} from "./helper.js";
 
 // Buttons
 
@@ -18,9 +24,6 @@ const statusInputError = document.getElementById("status-error");
 const blurDiv = document.getElementById("blur-div");
 const form = document.getElementById("form");
 
-// getting local storage values
-const items = JSON.parse(localStorage.getItem("task-manager"));
-
 // checking/creating local storage
 
 if (localStorage.getItem("task-manager") === null) {
@@ -32,15 +35,10 @@ if (localStorage.getItem("task-manager") === null) {
 
 // onclick popup
 
-todoInputBtn.addEventListener("click", () => {
-    showTaskPopup(form, blurDiv);
-});
+// get new task popup
 
-doingInputBtn.addEventListener("click", () => {
-    showTaskPopup(form, blurDiv);
-});
-
-doneInputBtn.addEventListener("click", () => {
+const taskSidebar = document.getElementById("task-sidebar");
+taskSidebar.addEventListener("click", () => {
     showTaskPopup(form, blurDiv);
 });
 
@@ -69,10 +67,9 @@ form.addEventListener("submit", (e) => {
     );
     if (!validated) {
         e.preventDefault();
-        console.log(statusInputVal);
     } else {
         let items = JSON.parse(localStorage.getItem("task-manager"));
-        items.currentIndex += 1;
+        items.currentIndex++;
         let taskObj = {
             taskval: taskInputVal,
             assigneeVal: assigneeInputVal,
@@ -80,7 +77,6 @@ form.addEventListener("submit", (e) => {
             statusVal: statusInputVal,
             taskIndex: items.currentIndex,
         };
-        console.log(taskObj);
         if (statusInputVal === "To do") {
             items.todo.push(taskObj);
         } else if (statusInputVal === "Doing") {
@@ -92,62 +88,51 @@ form.addEventListener("submit", (e) => {
     }
 });
 
-const createTask = () => {};
-
+// getting local storage values
+const items = JSON.parse(localStorage.getItem("task-manager"));
 const todoContainer = document.getElementById("todo-container");
 const doingContainer = document.getElementById("doing-container");
 const doneContainer = document.getElementById("done-container");
 
 if (items.todo !== []) {
-    items.todo.forEach((element) => {
-        const newTask = document.createElement("div");
-        newTask.classList.add("tasks");
-        const newTitle = document.createElement("p");
-        newTitle.innerText = element.taskval;
-        const editIcon = document.createElement("i");
-        editIcon.classList.add("fa-solid");
-        editIcon.classList.add("fa-pen");
-        newTask.appendChild(newTitle);
-        newTask.appendChild(editIcon);
-        todoContainer.insertBefore(
-            newTask,
-            document.getElementById("todo-input")
-        );
-    });
+    createTask(
+        todoContainer,
+        items.todo,
+        document.getElementById("todo-input"),
+        items.currentIndex
+    );
 }
 
 if (items.doing !== []) {
-    items.doing.forEach((element) => {
-        const newTask = document.createElement("div");
-        newTask.classList.add("tasks");
-        const newTitle = document.createElement("p");
-        newTitle.innerText = element.taskval;
-        const editIcon = document.createElement("i");
-        editIcon.classList.add("fa-solid");
-        editIcon.classList.add("fa-pen");
-        newTask.appendChild(newTitle);
-        newTask.appendChild(editIcon);
-        doingContainer.insertBefore(
-            newTask,
-            document.getElementById("doing-input")
-        );
-    });
+    createTask(
+        doingContainer,
+        items.doing,
+        document.getElementById("doing-input"),
+        items.currentIndex
+    );
 }
 
 if (items.done !== []) {
-    items.done.forEach((element) => {
-        const newTask = document.createElement("div");
-        newTask.classList.add("tasks");
-        const newTitle = document.createElement("p");
-        newTitle.innerText = element.taskval;
-        const editIcon = document.createElement("i");
-        editIcon.classList.add("fa-solid");
-        editIcon.classList.add("fa-pen");
-        newTask.appendChild(newTitle);
-        newTask.appendChild(editIcon);
-        doneContainer.insertBefore(
-            newTask,
-            document.getElementById("done-input")
-        );
+    createTask(
+        doneContainer,
+        items.done,
+        document.getElementById("done-input"),
+        items.currentIndex
+    );
+}
+
+if (items.todo !== []) {
+    todoContainer.addEventListener("click", (event) => {
+        handleTaskClick(event, "todo");
+    });
+}
+if (items.doing !== []) {
+    doingContainer.addEventListener("click", (event) => {
+        handleTaskClick(event, "doing");
+    });
+}
+if (items.done !== []) {
+    doneContainer.addEventListener("click", (event) => {
+        handleTaskClick(event, "done");
     });
 }

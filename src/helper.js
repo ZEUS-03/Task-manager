@@ -51,3 +51,54 @@ export function isValidated(
 
     return flag;
 }
+
+// function handling creation of new task in UI
+
+export const createTask = (container, items) => {
+    items.forEach((item) => {
+        const newTask = document.createElement("div");
+        newTask.classList.add("tasks");
+        const iconContainer = document.createElement("div");
+        const newTitle = document.createElement("p");
+        newTitle.innerText = item.taskval;
+        const editIcon = document.createElement("i");
+        const trashIcon = document.createElement("i");
+        trashIcon.setAttribute("id", item.taskIndex);
+        editIcon.classList.add("fa-solid");
+        editIcon.classList.add("fa-pen");
+        trashIcon.classList.add("fa-solid");
+        trashIcon.classList.add("fa-trash");
+        iconContainer.appendChild(editIcon);
+        iconContainer.appendChild(trashIcon);
+        newTask.appendChild(newTitle);
+        newTask.appendChild(iconContainer);
+        container.appendChild(newTask);
+    });
+};
+
+export const handleTaskClick = (event, taskContainerName) => {
+    const clickedElement = event.target;
+    const getItem = JSON.parse(localStorage.getItem("task-manager"));
+    const id = event.target.id;
+
+    if (clickedElement.classList.contains("fa-trash")) {
+        for (
+            let itemIndex = 0;
+            itemIndex < getItem[taskContainerName].length;
+            itemIndex++
+        ) {
+            if (id == getItem[taskContainerName][itemIndex]["taskIndex"]) {
+                if (itemIndex === 0) {
+                    getItem[taskContainerName].shift();
+                } else {
+                    getItem[taskContainerName].splice(itemIndex, itemIndex);
+                }
+                document
+                    .getElementById(id)
+                    .parentElement.parentElement.remove();
+                break;
+            }
+        }
+    }
+    localStorage.setItem("task-manager", JSON.stringify(getItem));
+};

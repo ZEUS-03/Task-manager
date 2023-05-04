@@ -22,6 +22,7 @@ nav {
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     margin-bottom: 5px;
+    padding-bottom: 10px;
 }
 
 .tasks {
@@ -39,15 +40,21 @@ nav {
     font-size: medium;
     box-shadow: inset 3px 3px 10px rgba(0, 0, 0, 0.5);
     border-radius: 5px;
-    margin-bottom: 3px;
+    margin-bottom: 6px;
 }
-.tasks > i {
+.tasks > div > i {
     margin: 5px;
+    padding-left: 2px;
     color: rgb(177, 177, 177);
 }
 
-.tasks > i:hover {
+.tasks > div > i:hover {
+    color: #bd3f56;
+    cursor: pointer;
+}
+.tasks > div > i:first-child:hover {
     color: white;
+    cursor: pointer;
 }
 
 .input {
@@ -83,9 +90,9 @@ nav {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgb(255, 255, 255, 0.1);
+    background-color: rgb(51, 48, 48);
     margin: 10px;
-    max-width: 400px;
+    max-width: 300px;
     padding: 40px;
     border-radius: 5px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.027);
@@ -98,9 +105,12 @@ nav {
     background: rgba(0, 0, 0, 0.473);
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.027);
     border: 0;
-    padding: 3px;
+    padding: 5px;
     color: white;
     border-radius: 5px;
+}
+.label-status {
+    margin-right: 8px;
 }
 
 .error {
@@ -146,4 +156,40 @@ select:hover {
 
 select:focus {
     outline: none;
+}
+
+.rotated {
+    display: flex;
+    position: absolute;
+    top: 45%;
+    right: 0;
+    height: 200px;
+    width: 40px;
+    writing-mode: vertical-lr;
+    transform-origin: top right;
+    background-color: rgb(68, 0, 131, 0.6);
+    align-items: center;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    cursor: pointer;
+}
+
+.rotated:hover {
+    background-color: rgb(68, 0, 131);
+}
+
+.rotated > p {
+    text-align: center;
+    margin: 0;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: #fff;
+    text-align: center;
 }

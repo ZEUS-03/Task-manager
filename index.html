@@ -41,51 +41,27 @@
                 Your task manager
             </p>
         </nav>
-        <div class="container-fluid">
+        <div class="container">
             <div class="row align-items-start">
                 <div class="col-md-4">
                     <div class="task-containers" id="todo-container">
                         <div class="d-flex m-0">
                             <p class="p-2 fw-semibold m-0">To Do</p>
                         </div>
-
-                        <input
-                            id="todo-input"
-                            class="input"
-                            type="button"
-                            value="Add a task..."
-                        />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="task-containers" id="doing-container">
                         <div class="d-flex m-0">
-                            <p class="p-2 fw-semibold m-0">Doing</p>
+                            <p class="p-2 fw-semibold m-0">In progress</p>
                         </div>
-
-                        <input
-                            id="doing-input"
-                            class="input"
-                            type="button"
-                            value="Add a task..."
-                        />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="task-containers" id="done-container">
                         <div class="d-flex m-0">
-                            <p class="p-2 fw-semibold m-0">Done</p>
+                            <p class="p-2 fw-semibold m-0">Completed</p>
                         </div>
-                        <div class="tasks">
-                            <p>demo tasks</p>
-                            <i class="fa-solid fa-pen"></i>
-                        </div>
-                        <input
-                            id="done-input"
-                            class="input"
-                            type="button"
-                            value="Add a task..."
-                        />
                     </div>
                 </div>
             </div>
@@ -94,34 +70,51 @@
 
         <form class="add-task-popup" id="form">
             <h3 class="text-center fs-4">Add a new task</h3>
-            <input type="text" id="task-input" placeholder="Task Title" />
+            <input
+                type="text"
+                id="task-input"
+                autocomplete="off"
+                placeholder="Task Title"
+            />
             <p id="task-error" class="error"></p>
 
             <input
                 type="text"
                 id="assignee-input"
                 placeholder="Assignee name"
+                autocomplete="off"
             />
             <p id="assignee-error" class="error"></p>
 
-            <input type="date" class="text-white" id="deadline-input" />
+            <input
+                type="date"
+                class="text-white"
+                id="deadline-input"
+                autocomplete="off"
+            />
             <p id="deadline-error" class="error"></p>
             <div class="d-flex justify-content-between">
-                <label for="status-input" class="">Task status</label>
+                <label for="status-input" class="label-status"
+                    >Task status</label
+                >
                 <select
                     name="status"
                     class="bg-dark text-white rounded-1 border-0 px-1"
                     id="status-input"
                 >
                     <option class="bg-dark" value="To do">To do</option>
-                    <option class="bg-dark" value="Doing">Doing</option>
-                    <option class="bg-dark" value="Done">Done</option>
+                    <option class="bg-dark" value="Doing">In progress</option>
+                    <option class="bg-dark" value="Done">Completed</option>
                 </select>
                 <p id="status-error" class="error"></p>
             </div>
 
             <button type="submit">Add</button>
         </form>
+
+        <div class="rotated d-flex justify-content-center" id="task-sidebar">
+            <p class="justify-content-center">Add new task</p>
+        </div>
 
         <footer class="text-center fs-5 fw-normal">
             Made with ❤️ by Gautam.
