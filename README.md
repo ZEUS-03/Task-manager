@@ -10,6 +10,7 @@ you can find the link here: https://yourdailytaskmanager.netlify.app/
 - Mark tasks as complete
 - Save task according to current status of task
 - Save tasks to local storage
+- Easy to use on phone due to responsive UI
 
 ## How to Use
 
