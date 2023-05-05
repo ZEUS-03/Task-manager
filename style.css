@@ -91,7 +91,7 @@ nav {
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: rgb(51, 48, 48);
-    margin: 10px;
+    /* margin: 10px; */
     max-width: 300px;
     padding: 40px;
     padding-top: 30px;
@@ -219,4 +219,39 @@ footer {
     width: 100%;
     color: #fff;
     text-align: center;
+}
+
+@media (max-width: 767px) {
+    .rotated {
+        position: relative;
+        top: 0;
+        left: 0;
+        height: 50px;
+        width: 80%;
+        margin: 0 auto;
+        writing-mode: horizontal-tb;
+        background-color: rgb(68, 0, 131, 0.6);
+        justify-content: center;
+        cursor: pointer;
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
+
+    .rotated:hover {
+        background-color: rgb(68, 0, 131);
+    }
+
+    .rotated > p {
+        text-align: center;
+        margin: 0;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+
+    .rotated::before {
+        content: "+";
+        font-size: 24px;
+        font-weight: bold;
+        margin-right: 8px;
+    }
 }

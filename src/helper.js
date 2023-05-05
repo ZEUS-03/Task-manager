@@ -145,7 +145,6 @@ export const handleTaskClick = (
                 showTaskPopup(form, blurDiv);
 
                 form.addEventListener("submit", (e) => {
-                    console.log("entered");
                     const taskInputVal =
                         document.getElementById("task-input").value;
                     const assigneeInputVal =
@@ -168,7 +167,6 @@ export const handleTaskClick = (
                     if (!validated) {
                         e.preventDefault();
                     } else {
-                        console.log(taskInputVal);
                         if (taskButton.innerText === "Edit task") {
                             getItem[taskContainerName][itemIndex]["taskVal"] =
                                 taskInputVal;
@@ -182,7 +180,6 @@ export const handleTaskClick = (
                             getItem[taskContainerName][itemIndex]["statusVal"] =
                                 statusInputVal;
 
-                            console.log(getItem);
                             if (statusInputVal !== taskMemory) {
                                 if (statusInputVal === "todo") {
                                     shiftItems(
