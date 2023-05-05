@@ -6,18 +6,17 @@ import {
     handleTaskClick,
 } from "./helper.js";
 
-// Buttons
-
-const todoInputBtn = document.getElementById("todo-input");
-const doingInputBtn = document.getElementById("doing-input");
-const doneInputBtn = document.getElementById("done-input");
-
 // Error
 
 const taskInputError = document.getElementById("task-error");
 const assigneeInputError = document.getElementById("assignee-error");
 const deadlineInputError = document.getElementById("deadline-error");
 const statusInputError = document.getElementById("status-error");
+
+// form Buttons and Headings
+
+const taskButton = document.getElementById("task-button");
+const taskHeading = document.getElementById("task-heading");
 
 // Popup div/form
 
@@ -39,12 +38,16 @@ if (localStorage.getItem("task-manager") === null) {
 
 const taskSidebar = document.getElementById("task-sidebar");
 taskSidebar.addEventListener("click", () => {
+    taskButton.innerText = "Add task";
+    taskHeading.innerText = "Create new task";
     showTaskPopup(form, blurDiv);
 });
 
 blurDiv.addEventListener("click", () => {
     hideTaskPopup(form, blurDiv);
 });
+
+document.getElementById("deadline-input").valueAsDate = new Date();
 
 // On form submition
 
@@ -68,23 +71,25 @@ form.addEventListener("submit", (e) => {
     if (!validated) {
         e.preventDefault();
     } else {
-        let items = JSON.parse(localStorage.getItem("task-manager"));
-        items.currentIndex++;
-        let taskObj = {
-            taskval: taskInputVal,
-            assigneeVal: assigneeInputVal,
-            deadlineVal: deadlineInputVal,
-            statusVal: statusInputVal,
-            taskIndex: items.currentIndex,
-        };
-        if (statusInputVal === "To do") {
-            items.todo.push(taskObj);
-        } else if (statusInputVal === "Doing") {
-            items.doing.push(taskObj);
-        } else if (statusInputVal === "Done") {
-            items.done.push(taskObj);
+        if (taskButton.innerText === "Add task") {
+            let items = JSON.parse(localStorage.getItem("task-manager"));
+            items.currentIndex++;
+            let taskObj = {
+                taskVal: taskInputVal,
+                assigneeVal: assigneeInputVal,
+                deadlineVal: deadlineInputVal,
+                statusVal: statusInputVal,
+                taskIndex: items.currentIndex,
+            };
+            if (statusInputVal === "todo") {
+                items.todo.push(taskObj);
+            } else if (statusInputVal === "doing") {
+                items.doing.push(taskObj);
+            } else if (statusInputVal === "done") {
+                items.done.push(taskObj);
+            }
+            localStorage.setItem("task-manager", JSON.stringify(items));
         }
-        localStorage.setItem("task-manager", JSON.stringify(items));
     }
 });
 
@@ -123,16 +128,49 @@ if (items.done !== []) {
 
 if (items.todo !== []) {
     todoContainer.addEventListener("click", (event) => {
-        handleTaskClick(event, "todo");
+        handleTaskClick(
+            event,
+            "todo",
+            form,
+            blurDiv,
+            taskButton,
+            taskHeading,
+            taskInputError,
+            assigneeInputError,
+            deadlineInputError,
+            statusInputError
+        );
     });
 }
 if (items.doing !== []) {
     doingContainer.addEventListener("click", (event) => {
-        handleTaskClick(event, "doing");
+        handleTaskClick(
+            event,
+            "doing",
+            form,
+            blurDiv,
+            taskButton,
+            taskHeading,
+            taskInputError,
+            assigneeInputError,
+            deadlineInputError,
+            statusInputError
+        );
     });
 }
 if (items.done !== []) {
     doneContainer.addEventListener("click", (event) => {
-        handleTaskClick(event, "done");
+        handleTaskClick(
+            event,
+            "done",
+            form,
+            blurDiv,
+            taskButton,
+            taskHeading,
+            taskInputError,
+            assigneeInputError,
+            deadlineInputError,
+            statusInputError
+        );
     });
 }

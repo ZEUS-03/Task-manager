@@ -69,7 +69,7 @@
         <div class="bg-div" id="blur-div"></div>
 
         <form class="add-task-popup" id="form">
-            <h3 class="text-center fs-4">Add a new task</h3>
+            <h3 class="text-center fs-4" id="task-heading"></h3>
             <input
                 type="text"
                 id="task-input"
@@ -91,6 +91,7 @@
                 class="text-white"
                 id="deadline-input"
                 autocomplete="off"
+                placeholder=""
             />
             <p id="deadline-error" class="error"></p>
             <div class="d-flex justify-content-between">
@@ -102,14 +103,14 @@
                     class="bg-dark text-white rounded-1 border-0 px-1"
                     id="status-input"
                 >
-                    <option class="bg-dark" value="To do">To do</option>
-                    <option class="bg-dark" value="Doing">In progress</option>
-                    <option class="bg-dark" value="Done">Completed</option>
+                    <option class="bg-dark" value="todo">To do</option>
+                    <option class="bg-dark" value="doing">In progress</option>
+                    <option class="bg-dark" value="done">Completed</option>
                 </select>
                 <p id="status-error" class="error"></p>
             </div>
 
-            <button type="submit">Add</button>
+            <button id="task-button" type="submit"></button>
         </form>
 
         <div class="rotated d-flex justify-content-center" id="task-sidebar">
